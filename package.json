@@ -1,0 +1,23 @@
+{
+  "name": "Dropbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/d3": "^5.7.2",
+    "@types/react": "^16.8.24",
+    "@types/react-dom": "^16.8.5",
+    "d3": "^5.9.7",
+    "lodash": "^4.17.15",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  }
+}
