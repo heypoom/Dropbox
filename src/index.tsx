@@ -4,7 +4,6 @@ import {useState, useRef} from 'react'
 import ReactDOM from 'react-dom'
 
 function App() {
-  const node = useRef(null)
   const [isActive, setActive] = useState(false)
   const [list, setList] = useState([1])
 
@@ -22,7 +21,7 @@ function App() {
       <button onClick={add}>Add</button>
       <button onClick={resize}>Resize</button>
 
-      <svg ref={node} onClick={toggle} className="graphic">
+      <svg onClick={toggle} className="graphic">
         {list.map((d, i) => (
           <circle
             r={d}
