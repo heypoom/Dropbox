@@ -1,42 +1,14 @@
 import * as React from 'react'
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef} from 'react'
 
 import ReactDOM from 'react-dom'
-import * as d3 from 'd3'
 
 function App() {
   const node = useRef(null)
   const [isActive, setActive] = useState(false)
   const [list, setList] = useState([1])
 
-  useEffect(() => {
-    d3.select(node.current)
-      .selectAll('circle')
-      .remove()
-
-    d3.select(node.current)
-      .selectAll('circle')
-      .data(list)
-      .enter()
-      .append('circle')
-      .attr('r', d => d)
-      .attr('cx', (d, i) => 10 + (d + 15) * i)
-      .attr('cy', 200)
-      .attr('fill', 'blue')
-  }, [list])
-
-  function resize() {
-    setList(list.map(x => x + 1))
-  }
-
-  useEffect(() => {
-    d3.select(node.current)
-      .selectAll('circle')
-      .transition()
-      .duration(300)
-      .attr('fill', isActive ? 'red' : 'blue')
-  }, [isActive])
-
+  const resize = () => setList(list.map(x => x + 1))
   const toggle = () => setActive(!isActive)
 
   const add = () => {
@@ -45,18 +17,23 @@ function App() {
     setList([...list, circle])
   }
 
-  window.setList = setList
-
   return (
     <div className="container">
       <button onClick={add}>Add</button>
       <button onClick={resize}>Resize</button>
 
-      <svg ref={node} onClick={toggle} className="graphic" />
+      <svg ref={node} onClick={toggle} className="graphic">
+        {list.map((d, i) => (
+          <circle
+            r={d}
+            cx={10 + (d + 15) * i}
+            cy={200}
+            fill={isActive ? 'red' : 'blue'}
+          />
+        ))}
+      </svg>
     </div>
   )
 }
 
 ReactDOM.render(<App />, document.querySelector('#app'))
-
-window.d3 = d3
